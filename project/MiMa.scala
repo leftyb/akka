@@ -177,8 +177,6 @@ object MiMa extends AutoPlugin {
       ProblemFilters.exclude[MissingClassProblem]("akka.routing.DeprecatedRouterConfig"),
       // object akka.routing.RoundRobinRouter does not have a correspondent in new version
       ProblemFilters.exclude[MissingClassProblem]("akka.routing.RoundRobinRouter$"),
-      // method nrOfInstances()Int in class akka.routing.FromConfig does not have a correspondent in new version
-      ProblemFilters.exclude[MissingMethodProblem]("akka.routing.FromConfig.nrOfInstances"),
       // method toString()java.lang.String in object akka.routing.BalancingPool does not have a correspondent in new version
       ProblemFilters.exclude[MissingMethodProblem]("akka.routing.BalancingPool.toString"),
       ProblemFilters.exclude[MissingMethodProblem]("akka.remote.RemoteSettings.LogRemoteLifecycleEvents"),
@@ -189,8 +187,6 @@ object MiMa extends AutoPlugin {
       ProblemFilters.exclude[MissingClassProblem]("akka.cluster.routing.ClusterRouterSettings"),
       // object akka.cluster.routing.ClusterRouterConfig does not have a correspondent in new version
       ProblemFilters.exclude[MissingClassProblem]("akka.cluster.routing.ClusterRouterConfig$"),
-      // method nrOfInstances()Int in class akka.cluster.routing.ClusterRouterPool does not have a correspondent in new version
-      ProblemFilters.exclude[MissingMethodProblem]("akka.cluster.routing.ClusterRouterPool.nrOfInstances"),
       // object akka.cluster.routing.AdaptiveLoadBalancingRouter does not have a correspondent in new version
       ProblemFilters.exclude[MissingClassProblem]("akka.cluster.routing.AdaptiveLoadBalancingRouter$"),
       // object akka.cluster.routing.ClusterRouterSettings does not have a correspondent in new version
@@ -216,6 +212,7 @@ object MiMa extends AutoPlugin {
       ProblemFilters.exclude[MissingTypesProblem]("akka.actor.RootActorPath"),
       // declaration of trait akka.actor.ActorPath has changed to class akka.actor.ActorPath in new version; changing trait to class breaks client code
       ProblemFilters.exclude[IncompatibleTemplateDefProblem]("akka.actor.ActorPath"),
+      ProblemFilters.exclude[MissingMethodProblem]("akka.actor.ActorPath.ValidSymbols"),
       ProblemFilters.exclude[MissingMethodProblem]("akka.actor.LocalActorRefProvider.terminationPromise"),
       ProblemFilters.exclude[MissingClassProblem]("akka.actor.UntypedActorFactoryConsumer"),
       ProblemFilters.exclude[MissingMethodProblem]("akka.actor.FSM#State.copy"),
