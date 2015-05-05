@@ -223,7 +223,6 @@ object MiMa extends AutoPlugin {
       ProblemFilters.exclude[MissingMethodProblem]("akka.actor.IndirectActorProducer.UntypedActorFactoryConsumerClass"),
       FilterAnyProblem("akka.actor.ActorSystemImpl"),
       ProblemFilters.exclude[MissingMethodProblem]("akka.pattern.AskSupport.ask"),
-      FilterAnyProblem("akka.pattern.PromiseActorRef"),
       FilterAnyProblem("akka.actor.ActorSystemImpl$TerminationCallbacks"),
       ProblemFilters.exclude[MissingMethodProblem]("akka.event.Logging#LogEvent.getMDC"),
       ProblemFilters.exclude[MissingMethodProblem]("akka.util.ByteString.byteStringCompanion"),
