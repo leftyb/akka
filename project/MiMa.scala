@@ -215,7 +215,6 @@ object MiMa extends AutoPlugin {
       ProblemFilters.exclude[MissingMethodProblem]("akka.actor.ActorPath.ValidSymbols"),
       ProblemFilters.exclude[MissingMethodProblem]("akka.actor.LocalActorRefProvider.terminationPromise"),
       ProblemFilters.exclude[MissingClassProblem]("akka.actor.UntypedActorFactoryConsumer"),
-      ProblemFilters.exclude[MissingMethodProblem]("akka.actor.FSM#State.copy"),
       ProblemFilters.exclude[MissingMethodProblem]("akka.actor.ActorSystemImpl.terminationFuture"),
       ProblemFilters.exclude[MissingMethodProblem]("akka.actor.IndirectActorProducer.UntypedActorFactoryConsumerClass"),
       FilterAnyProblem("akka.actor.ActorSystemImpl"),

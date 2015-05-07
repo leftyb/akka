@@ -134,10 +134,7 @@ object FSM {
      */
     private[akka] override def notifies: Boolean = false
 
-    /**
-     * INTERNAL API
-     */
-    private[akka] override def copy2(stateName: S = stateName, stateData: D = stateData, timeout: Option[FiniteDuration] = timeout, stopReason: Option[Reason] = stopReason, replies: List[Any] = replies): State[S, D] = {
+    override def copy(stateName: S = stateName, stateData: D = stateData, timeout: Option[FiniteDuration] = timeout, stopReason: Option[Reason] = stopReason, replies: List[Any] = replies): State[S, D] = {
       new SilentState(stateName, stateData, timeout, stopReason, replies)
     }
   }
@@ -154,10 +151,8 @@ object FSM {
      */
     private[akka] def notifies: Boolean = true
 
-    /**
-     * INTERNAL API
-     */
-    private[akka] def copy2(stateName: S = stateName, stateData: D = stateData, timeout: Option[FiniteDuration] = timeout, stopReason: Option[Reason] = stopReason, replies: List[Any] = replies): State[S, D] = {
+    // defined here to be able to override it in SilentState
+    def copy(stateName: S = stateName, stateData: D = stateData, timeout: Option[FiniteDuration] = timeout, stopReason: Option[Reason] = stopReason, replies: List[Any] = replies): State[S, D] = {
       new State(stateName, stateData, timeout, stopReason, replies)
     }
 
@@ -169,9 +164,9 @@ object FSM {
      * Use Duration.Inf to deactivate an existing timeout.
      */
     def forMax(timeout: Duration): State[S, D] = timeout match {
-      case f: FiniteDuration ⇒ copy2(timeout = Some(f))
-      case Duration.Inf      ⇒ copy2(timeout = SomeMaxFiniteDuration) // we map the Infinite duration to a special marker,
-      case _                 ⇒ copy2(timeout = None) // that means "cancel stateTimeout". This marker is needed
+      case f: FiniteDuration ⇒ copy(timeout = Some(f))
+      case Duration.Inf      ⇒ copy(timeout = SomeMaxFiniteDuration) // we map the Infinite duration to a special marker,
+      case _                 ⇒ copy(timeout = None) // that means "cancel stateTimeout". This marker is needed
     } // so we do not have to break source/binary compat.
     // TODO: Can be removed once we can break State#timeout signature to `Option[Duration]`
 
@@ -181,7 +176,7 @@ object FSM {
      * @return this state transition descriptor
      */
     def replying(replyValue: Any): State[S, D] = {
-      copy2(replies = replyValue :: replies)
+      copy(replies = replyValue :: replies)
     }
 
     /**
@@ -189,14 +184,14 @@ object FSM {
      * set when transitioning to the new state.
      */
     def using(@deprecatedName('nextStateDate) nextStateData: D): State[S, D] = {
-      copy2(stateData = nextStateData)
+      copy(stateData = nextStateData)
     }
 
     /**
      * INTERNAL API.
      */
     private[akka] def withStopReason(reason: Reason): State[S, D] = {
-      copy2(stopReason = Some(reason))
+      copy(stopReason = Some(reason))
     }
 
     /**
