@@ -49,8 +49,8 @@ private[io] class UdpListener(val udp: UdpExt,
       channelRegistry.register(channel, OP_READ)
       log.debug("Successfully bound to [{}]", ret)
       bind.options.foreach {
-        case o: Inet.AfterChannelConnect ⇒ o.afterConnect(channel)
-        case _                           ⇒
+        case o: Inet.SocketOptionV2 ⇒ o.afterBind(channel.socket)
+        case _                      ⇒
       }
       ret
     } catch {

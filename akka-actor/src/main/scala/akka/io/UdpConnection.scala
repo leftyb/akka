@@ -67,6 +67,10 @@ private[io] class UdpConnection(udpConn: UdpConnectedExt,
 
   def receive = {
     case registration: ChannelRegistration ⇒
+      options.foreach {
+        case v2: Inet.SocketOptionV2 ⇒ v2.afterConnect(channel.socket)
+        case _                       ⇒
+      }
       commander ! Connected
       context.become(connected(registration), discardOld = true)
   }

@@ -87,7 +87,7 @@ class UdpIntegrationSpec extends AkkaSpec("""
 
     "call SocketOption.afterConnect method after binding." in {
       val commander = TestProbe()
-      val assertOption = AssertAfterConnect()
+      val assertOption = AssertAfterChannelBind()
       commander.send(IO(Udp), Bind(testActor, addresses(4), options = List(assertOption)))
       commander.expectMsg(Bound(addresses(4)))
       assert(assertOption.afterCalled === 1)
@@ -113,11 +113,11 @@ private case class AssertBeforeBind() extends SocketOption {
   }
 }
 
-private case class AssertAfterConnect() extends AfterChannelConnect {
+private case class AssertAfterChannelBind() extends SocketOptionV2 {
   var afterCalled = 0
 
-  override def afterConnect(c: DatagramChannel) = {
-    assert(c.socket.isBound)
+  override def afterBind(s: DatagramSocket) = {
+    assert(s.isBound)
     afterCalled += 1
   }
 }

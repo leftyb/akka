@@ -44,24 +44,38 @@ object Inet {
    */
   abstract class AbstractSocketOption extends SocketOption
 
-  trait AfterChannelConnect extends SocketOption {
+  trait SocketOptionV2 extends SocketOption {
     /**
      * Action to be taken for this option after connect returned (i.e. on
      * the slave socket for servers).
      */
-    def afterConnect(c: DatagramChannel): Unit = ()
+    def afterBind(s: DatagramSocket): Unit = ()
 
     /**
      * Action to be taken for this option after connect returned (i.e. on
      * the slave socket for servers).
      */
-    def afterConnect(c: ServerSocketChannel): Unit = ()
+    def afterBind(s: ServerSocket): Unit = ()
+
+    /**
+     * Action to be taken for this option after connect returned (i.e. on
+     * the slave socket for servers).
+     */
+    def afterConnect(s: DatagramSocket): Unit = ()
+
+    /**
+     * Action to be taken for this option after connect returned (i.e. on
+     * the slave socket for servers).
+     */
+    // FIXME where to call this one? Is it needed?
+    // def afterConnect(s: ServerSocket): Unit = ()
+
   }
 
   /**
    * Java API
    */
-  abstract class AbstractAfterChannelConnect extends AfterChannelConnect
+  abstract class AbstractSocketOptionV2 extends SocketOptionV2
 
   /**
    * DatagramChannel creation behavior.
