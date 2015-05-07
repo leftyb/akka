@@ -11,6 +11,19 @@ When migrating from earlier versions you should first follow the instructions fo
 migrating :ref:`1.3.x to 2.0.x <migration-2.0>` and then :ref:`2.0.x to 2.1.x <migration-2.1>`
 and then :ref:`2.1.x to 2.2.x <migration-2.2>` and then :ref:`2.2.x to 2.3.x <migration-2.3>`.
 
+Binary Compatibility
+====================
+
+Akka 2.4.x is backwards binary compatible with previous 2.3.x versions apart from the following
+exceptions. This means that the new JARs are a drop-in replacement for the old one 
+(but not the other way around) as long as your build does not enable the inliner (Scala-only restriction).
+
+The following parts are not binary compatible with 2.3.x:
+
+* akka-testkit and akka-remote-testkit
+* experimental modules, such as akka-persistence and akka-contrib
+* features, classes, methods that were deprecated in 2.3.x and removed in 2.4.x 
+
 Advanced Notice: TypedActors will go away
 ========================================
 
