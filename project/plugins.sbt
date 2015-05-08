@@ -2,6 +2,10 @@ resolvers += Classpaths.typesafeResolver
 
 resolvers += "jgit-repo" at "http://download.eclipse.org/jgit/maven"
 
+// need this to resolve http://jcenter.bintray.com/org/jenkins-ci/jenkins/1.26/
+// which is used by plugin "org.kohsuke" % "github-api" % "1.68"
+resolvers += "Bintray Jcenter" at "http://jcenter.bintray.com"
+
 // these comment markers are for including code into the docs
 //#sbt-multi-jvm
 addSbtPlugin("com.typesafe.sbt" % "sbt-multi-jvm" % "0.3.8")
@@ -34,3 +38,5 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.0.0-RC1")
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.7.4")
 
 libraryDependencies += "org.kohsuke" % "github-api" % "1.68"
+
+addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.1.8")
