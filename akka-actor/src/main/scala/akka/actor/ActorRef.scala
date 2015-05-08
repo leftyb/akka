@@ -131,7 +131,8 @@ abstract class ActorRef extends java.lang.Comparable[ActorRef] with Serializable
    * The contract is that if this method returns true, then it will never be false again.
    * But you cannot rely on that it is alive if it returns false, since this by nature is a racy method.
    */
-  @deprecated("Use context.watch(actor) and receive Terminated(actor)", "2.2") def isTerminated: Boolean
+  @deprecated("Use context.watch(actor) and receive Terminated(actor)", "2.2")
+  private[akka] def isTerminated: Boolean
 
   final override def hashCode: Int = {
     if (path.uid == ActorCell.undefinedUid) path.hashCode
@@ -247,10 +248,10 @@ private[akka] abstract class InternalActorRef extends ActorRef with ScalaActorRe
   def isLocal: Boolean
 
   /**
-   * Returns “true” if the actor is locally known to be terminated, “false” if
+   * INTERNAL API: Returns “true” if the actor is locally known to be terminated, “false” if
    * alive or uncertain.
    */
-  def isTerminated: Boolean
+  private[akka] def isTerminated: Boolean
 }
 
 /**
@@ -319,11 +320,11 @@ private[akka] class LocalActorRef private[akka] (
   protected def actorContext: ActorContext = actorCell
 
   /**
-   * Is the actor terminated?
+   * INTERNAL API: Is the actor terminated?
    * If this method returns true, it will never return false again, but if it
    * returns false, you cannot be sure if it's alive still (race condition)
    */
-  override def isTerminated: Boolean = actorCell.isTerminated
+  override private[akka] def isTerminated: Boolean = actorCell.isTerminated
 
   /**
    * Starts the actor after initialization.
@@ -445,7 +446,8 @@ private[akka] trait MinimalActorRef extends InternalActorRef with LocalRef {
   override def suspend(): Unit = ()
   override def resume(causedByFailure: Throwable): Unit = ()
   override def stop(): Unit = ()
-  @deprecated("Use context.watch(actor) and receive Terminated(actor)", "2.2") override def isTerminated = false
+  @deprecated("Use context.watch(actor) and receive Terminated(actor)", "2.2")
+  override private[akka] def isTerminated = false
 
   override def !(message: Any)(implicit sender: ActorRef = Actor.noSender): Unit = ()
 
@@ -511,7 +513,8 @@ private[akka] class EmptyLocalActorRef(override val provider: ActorRefProvider,
                                        override val path: ActorPath,
                                        val eventStream: EventStream) extends MinimalActorRef {
 
-  @deprecated("Use context.watch(actor) and receive Terminated(actor)", "2.2") override def isTerminated = true
+  @deprecated("Use context.watch(actor) and receive Terminated(actor)", "2.2")
+  override private[akka] def isTerminated = true
 
   override def sendSystemMessage(message: SystemMessage): Unit = {
     if (Mailbox.debug) println(s"ELAR $path having enqueued $message")
