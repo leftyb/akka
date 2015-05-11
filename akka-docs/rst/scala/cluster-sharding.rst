@@ -274,6 +274,24 @@ using a ``Passivate``.
 Note that the state of the entries themselves will not be restored unless they have been made persistent,
 e.g. with ``akka-persistence``.
 
+Dependencies
+------------
+
+To use the Cluster Sharding you must add the following dependency in your project.
+
+sbt::
+
+    "com.typesafe.akka" %% "akka-cluster-sharding" % "@version@" @crossString@
+
+maven::
+
+  <dependency>
+    <groupId>com.typesafe.akka</groupId>
+    <artifactId>akka-cluster-sharding_@binVersion@</artifactId>
+    <version>@version@</version>
+  </dependency>
+
+
 Configuration
 -------------
 
