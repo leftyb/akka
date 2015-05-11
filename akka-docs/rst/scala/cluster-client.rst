@@ -15,6 +15,8 @@ i.e. not necessarily the initial contact points. Also, note it's necessary to ch
 ``akka.remote.RemoteActorRefProvider`` or ``akka.cluster.ClusterActorRefProvider`` when using
 the cluster client. 
 
+
+
 The receptionist is supposed to be started on all nodes, or all nodes with specified role,
 in the cluster. The receptionist can be started with the ``ClusterReceptionistExtension``
 or as an ordinary actor.
@@ -107,3 +109,19 @@ It is recommended to load the extension when the actor system is started by defi
 
    akka.extensions = ["akka.cluster.client.ClusterReceptionistExtension"]
 
+Dependencies
+------------
+
+To use the Cluster Client you must add the following dependency in your project.
+
+sbt::
+
+    "com.typesafe.akka" %% "akka-cluster-tools" % "@version@" @crossString@
+
+maven::
+
+  <dependency>
+    <groupId>com.typesafe.akka</groupId>
+    <artifactId>akka-cluster-tools_@binVersion@</artifactId>
+    <version>@version@</version>
+  </dependency>

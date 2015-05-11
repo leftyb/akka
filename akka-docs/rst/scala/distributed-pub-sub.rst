@@ -143,3 +143,19 @@ and then it takes a while for it to be populated.
 
    akka.extensions = ["akka.cluster.pubsub.DistributedPubSubExtension"]
 
+Dependencies
+------------
+
+To use the Cluster Singleton you must add the following dependency in your project.
+
+sbt::
+
+    "com.typesafe.akka" %% "akka-cluster-tools" % "@version@" @crossString@
+
+maven::
+
+  <dependency>
+    <groupId>com.typesafe.akka</groupId>
+    <artifactId>akka-cluster-tools_@binVersion@</artifactId>
+    <version>@version@</version>
+  </dependency>

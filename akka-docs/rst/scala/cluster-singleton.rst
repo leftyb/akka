@@ -129,4 +129,19 @@ A more comprehensive sample is available in the `Typesafe Activator <http://www.
 tutorial named `Distributed workers with Akka and Scala! <http://www.typesafe.com/activator/template/akka-distributed-workers>`_
 and `Distributed workers with Akka and Java! <http://www.typesafe.com/activator/template/akka-distributed-workers-java>`_.
 
+Dependencies
+------------
 
+To use the Cluster Singleton you must add the following dependency in your project.
+
+sbt::
+
+    "com.typesafe.akka" %% "akka-cluster-tools" % "@version@" @crossString@
+
+maven::
+
+  <dependency>
+    <groupId>com.typesafe.akka</groupId>
+    <artifactId>akka-cluster-tools_@binVersion@</artifactId>
+    <version>@version@</version>
+  </dependency>
